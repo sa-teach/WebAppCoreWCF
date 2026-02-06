@@ -26,6 +26,10 @@ Invoke-WebRequest `
 	-Body $soap | Select-Object -ExpandProperty Content
 ```
 
+Чтоб без тегов:
+```
+$xml.Envelope.Body.SayHelloResponse.SayHelloResult
+```
 В результате вы получите XML, внутри которого будет что‑то вроде:
 ```
 <SayHelloResponse ...>  <SayHelloResult>Hello, World!</SayHelloResult></SayHelloResponse>
