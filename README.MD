@@ -1,4 +1,12 @@
-Быстрый вызов SayHello через PowerShell:
+Базовый адрес приложения (по логам):
+
+SOAP endpoint:
+```
+http://localhost:ХХХХ/soap/GreeterService.svc
+```
+Когда вы отправите SOAP‑запрос к SayHello, в ответном XML вы увидите Hello, <имя>!.
+
+Быстрый вызов SayHello через PowerShell
 
 Откройте новый PowerShell и выполните (при запущенном dotnet run):
 ```
