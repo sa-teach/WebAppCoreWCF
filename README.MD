@@ -1,42 +1,30 @@
-SOAP endpoint:
-```
-http://localhost:ХХХХ/soap/GreeterService.svc
-```
-Когда вы отправите SOAP‑запрос к SayHello, в ответном XML вы увидите Hello, <имя>!.
+## ASP.NET Core + CoreWCF demo
 
-**Быстрый вызов SayHello через PowerShell**
+Этот репозиторий содержит минимальный пример **ASP.NET Core (.NET 10)** приложения, внутри которого поднят **SOAP‑сервис на CoreWCF**.
 
-Откройте новый PowerShell и выполните (при запущенном dotnet run):
-```
-$soap = @'
-	<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">  
-		<s:Body>    
-			<SayHello xmlns="urn:webappcorewcf:greeter">      
-				<name>World</name>    
-			</SayHello>  
-		</s:Body>
-	</s:Envelope>
-'@
-```
-```
-Invoke-WebRequest `
-	-Uri "http://localhost:5104/soap/GreeterService.svc" `  
-	-Method Post `  -ContentType "text/xml; charset=utf-8" `  
-	-Headers @{ SOAPAction = "urn:webappcorewcf:greeter/IGreeterService/SayHello" } `  
-	-Body $soap | Select-Object -ExpandProperty Content
-```
+- Web API контроллер: `WeatherForecastController`
+- SOAP‑сервис: `IGreeterService` / `GreeterService`
 
-Чтоб без тегов:
-```
-$xml = [xml](Invoke-WebRequest -Uri "http://localhost:5104/soap/GreeterService.svc" `
-  -Method Post `
-  -ContentType "text/xml; charset=utf-8" `
-  -Headers @{ SOAPAction = "urn:webappcorewcf:greeter/IGreeterService/SayHello" } `
-  -Body $soap).Content
+Подробный пошаговый **гайд с объяснениями, как всё устроено и как это повторить**, лежит в отдельном файле:
 
-$xml.Envelope.Body.SayHelloResponse.SayHelloResult
-```
-В результате вы получите XML, внутри которого будет что‑то вроде:
-```
-<SayHelloResponse ...>  <SayHelloResult>Hello, World!</SayHelloResult></SayHelloResponse>
-```
+- см. файл **`CoreWCF-Guide.md`**
+
+В нём описано:
+- что такое CoreWCF и чем он отличается от старого WCF;
+- какие NuGet‑пакеты нужны;
+- какие классы/файлы создать (контракт, реализация);
+- как именно настроен `Program.cs` и pipeline ASP.NET Core;
+- как тестировать SOAP‑методы через PowerShell и другие клиенты.
+
+Кратко, как быстро проверить сервис:
+
+1. Запустите приложение:
+   ```bash
+   dotnet run
+   ```
+2. Откройте WSDL в браузере:
+   ```text
+   http://localhost:5104/soap/GreeterService.svc?wsdl
+   ```
+3. Вызовите метод `SayHello` через PowerShell (пример и разбор ответа — в `CoreWCF-Guide.md`).
+
