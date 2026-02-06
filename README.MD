@@ -1,14 +1,13 @@
-Базовый адрес приложения (по логам):
-
 SOAP endpoint:
-http://localhost:ХХХХ/soap/GreeterService.svc
+```
+http://localhost:РҐРҐРҐРҐ/soap/GreeterService.svc
+```
+РљРѕРіРґР° РІС‹ РѕС‚РїСЂР°РІРёС‚Рµ SOAPвЂ‘Р·Р°РїСЂРѕСЃ Рє SayHello, РІ РѕС‚РІРµС‚РЅРѕРј XML РІС‹ СѓРІРёРґРёС‚Рµ Hello, <РёРјСЏ>!.
 
-Когда вы отправите SOAP?запрос к SayHello, в ответном XML вы увидите Hello, <имя>!.
+**Р‘С‹СЃС‚СЂС‹Р№ РІС‹Р·РѕРІ SayHello С‡РµСЂРµР· PowerShell**
 
-Быстрый вызов SayHello через PowerShell:
-
-Откройте новый PowerShell и выполните (при запущенном dotnet run):
-
+РћС‚РєСЂРѕР№С‚Рµ РЅРѕРІС‹Р№ PowerShell Рё РІС‹РїРѕР»РЅРёС‚Рµ (РїСЂРё Р·Р°РїСѓС‰РµРЅРЅРѕРј dotnet run):
+```
 $soap = @'
 	<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">  
 		<s:Body>    
@@ -24,8 +23,9 @@ Invoke-WebRequest `
 	-Method Post `  -ContentType "text/xml; charset=utf-8" `  
 	-Headers @{ SOAPAction = "urn:webappcorewcf:greeter/IGreeterService/SayHello" } `  
 	-Body $soap | Select-Object -ExpandProperty Content
+```
 
-
-В результате вы получите XML, внутри которого будет что?то вроде:
-
+Р’ СЂРµР·СѓР»СЊС‚Р°С‚Рµ РІС‹ РїРѕР»СѓС‡РёС‚Рµ XML, РІРЅСѓС‚СЂРё РєРѕС‚РѕСЂРѕРіРѕ Р±СѓРґРµС‚ С‡С‚РѕвЂ‘С‚Рѕ РІСЂРѕРґРµ:
+```
 <SayHelloResponse ...>  <SayHelloResult>Hello, World!</SayHelloResult></SayHelloResponse>
+```
