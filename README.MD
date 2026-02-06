@@ -1,13 +1,6 @@
-Базовый адрес приложения (по логам):
+Р‘С‹СЃС‚СЂС‹Р№ РІС‹Р·РѕРІ SayHello С‡РµСЂРµР· PowerShell:
 
-SOAP endpoint:
-http://localhost:ХХХХ/soap/GreeterService.svc
-
-Когда вы отправите SOAP?запрос к SayHello, в ответном XML вы увидите Hello, <имя>!.
-
-Быстрый вызов SayHello через PowerShell:
-
-Откройте новый PowerShell и выполните (при запущенном dotnet run):
+РћС‚РєСЂРѕР№С‚Рµ РЅРѕРІС‹Р№ PowerShell Рё РІС‹РїРѕР»РЅРёС‚Рµ (РїСЂРё Р·Р°РїСѓС‰РµРЅРЅРѕРј dotnet run):
 
 $soap = @'
 	<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">  
@@ -26,6 +19,6 @@ Invoke-WebRequest `
 	-Body $soap | Select-Object -ExpandProperty Content
 
 
-В результате вы получите XML, внутри которого будет что?то вроде:
+Р’ СЂРµР·СѓР»СЊС‚Р°С‚Рµ РІС‹ РїРѕР»СѓС‡РёС‚Рµ XML, РІРЅСѓС‚СЂРё РєРѕС‚РѕСЂРѕРіРѕ Р±СѓРґРµС‚ С‡С‚РѕвЂ‘С‚Рѕ РІСЂРѕРґРµ:
 
 <SayHelloResponse ...>  <SayHelloResult>Hello, World!</SayHelloResult></SayHelloResponse>
